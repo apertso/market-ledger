@@ -1,0 +1,138 @@
+.settings-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 580px) minmax(0, 320px);
+  gap: 100px;
+  border-top: 1px solid var(--rule);
+  padding-top: 36px;
+}
+.field {
+  margin-bottom: 12px;
+}
+label {
+  font-weight: 550;
+  font-size: 17px;
+}
+.field-hint {
+  margin: 6px 0 14px;
+  max-width: 58ch;
+  color: var(--muted);
+  font-size: 14px;
+}
+.input-wrap {
+  display: flex;
+  align-items: center;
+  width: 240px;
+  height: 48px;
+  border: 1px solid var(--input-rule);
+  background: var(--surface);
+}
+.input-wrap:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+.input-wrap:has([aria-invalid='true']) {
+  border-color: var(--negative);
+}
+input {
+  width: 140px;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 10px 14px;
+  color: var(--ink);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  caret-color: var(--ink);
+}
+.input-wrap > span {
+  margin-left: auto;
+  padding-right: 14px;
+  font-size: 13px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.field-range {
+  color: var(--muted);
+  margin: 8px 0 0;
+  font-size: 12px;
+}
+.field-error {
+  min-height: 20px;
+  color: var(--negative);
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+.apply-section {
+  margin-top: 20px;
+  border-top: 1px solid var(--rule);
+  padding-top: 24px;
+}
+.apply-section > p:first-child {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 60ch;
+  margin: 0 0 20px;
+}
+.apply-confirmation {
+  margin: 20px 0 0;
+  font-size: 14px;
+}
+.apply-confirmation a {
+  display: inline-block;
+  margin-left: 8px;
+  font-weight: 550;
+}
+.settings-summary {
+  padding-left: 32px;
+  border-left: 1px solid var(--rule);
+  align-self: start;
+}
+.settings-summary h2 {
+  font-size: 18px;
+  font-weight: 550;
+  margin: 0 0 16px;
+}
+.settings-summary p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+.settings-summary .rate {
+  font-size: 28px;
+  color: var(--ink);
+  font-weight: 550;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.rate span {
+  font-size: 14px;
+  font-weight: 400;
+}
+.settings-summary .rate-formula {
+  font-size: 12px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.active-run h3 {
+  font-size: 14px;
+  font-weight: 550;
+  margin: 0 0 8px;
+}
+@media (max-width: 900px) {
+  .settings-layout {
+    gap: 40px;
+  }
+}
+@media (max-width: 640px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 28px;
+  }
+  .settings-summary {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    padding: 24px 0 0;
+  }
+}

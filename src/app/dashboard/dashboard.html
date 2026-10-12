@@ -1,0 +1,138 @@
+<div class="page-heading">
+  <div>
+    <h1>Live market</h1>
+    <p>Current quotes. Cumulative trades. One active run.</p>
+  </div>
+  <button
+    class="button"
+    [disabled]="market.status() === 'initializing' || market.status() === 'error'"
+    (click)="market.status() === 'paused' ? market.resume() : market.pause()"
+  >
+    @if (market.status() === 'paused') {
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 10 7-10 7Z" /></svg>Resume
+    } @else {
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12m8-12v12" /></svg>Pause
+    }
+  </button>
+</div>
+<div class="run-strip">
+  <span class="run-label">Run {{ market.runId() }}</span>
+  <span>{{ market.settings().instrumentCount }} instruments</span>
+  <span
+    >{{ market.settings().updatesPerBatch | quantity }} updates /
+    {{ market.settings().intervalMs | quantity }} ms</span
+  >
+  <span
+    >{{ market.nominalRate() | number: '1.0-2' }} updates/s <span class="muted">nominal</span></span
+  >
+  <a routerLink="/settings">Edit producer</a>
+</div>
+<div
+  class="table-scroll"
+  tabindex="0"
+  role="region"
+  aria-label="Market metrics, scroll to see all columns"
+>
+  <table>
+    <caption class="visually-hidden">
+      Live metrics for fictional instruments. Volume and VWAP are cumulative since this run began. A
+      dash means unavailable.
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Instrument</th>
+        <th scope="col">Last price <span>USD</span></th>
+        <th scope="col">Spread <span>USD</span></th>
+        <th scope="col">Volume <span>units</span></th>
+        <th scope="col">VWAP <span>USD</span></th>
+        <th scope="col">Book imbalance <span>−1 to +1</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of market.snapshot().rows; track row.symbol) {
+        <tr>
+          <th scope="row">{{ row.symbol }}</th>
+          <td [attr.aria-label]="row.lastCents === null ? 'Unavailable' : null">
+            {{
+              row.lastCents === null
+                ? '—'
+                : (row.lastCents / 100 | currency: 'USD' : 'symbol' : '1.2-2')
+            }}
+          </td>
+          <td [attr.aria-label]="row.spreadCents === null ? 'Unavailable' : null">
+            {{
+              row.spreadCents === null
+                ? '—'
+                : (row.spreadCents / 100 | currency: 'USD' : 'symbol' : '1.2-2')
+            }}
+          </td>
+          <td>{{ row.volume | quantity }}</td>
+          <td [attr.aria-label]="row.vwapCents === null ? 'Unavailable' : null">
+            {{
+              row.vwapCents === null
+                ? '—'
+                : (row.vwapCents / 100 | currency: 'USD' : 'symbol' : '1.2-2')
+            }}
+          </td>
+          <td
+            [class.positive]="row.imbalance !== null && row.imbalance > 0"
+            [class.negative]="row.imbalance !== null && row.imbalance < 0"
+            [attr.aria-label]="row.imbalance === null ? 'Unavailable' : null"
+          >
+            @if (row.imbalance === null) {
+              —
+            } @else {
+              <span>{{ row.imbalance > 0 ? '+' : '' }}{{ row.imbalance | number: '1.2-2' }}</span>
+              <span class="imbalance-track" aria-hidden="true"
+                ><span
+                  [style.left.%]="row.imbalance >= 0 ? 50 : 50 + row.imbalance * 50"
+                  [style.width.%]="(row.imbalance >= 0 ? row.imbalance : -row.imbalance) * 50"
+                ></span
+              ></span>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<div class="table-footer">
+  <span
+    >{{ market.snapshot().tradeCount | quantity }} trades counted
+    <span class="footer-separator">·</span> Every trade contributes once</span
+  >
+  <span>
+    @if (market.status() === 'paused') {
+      Paused · totals preserved
+    } @else if (market.updatedAt(); as updatedAt) {
+      Updated {{ updatedAt | date: 'HH:mm:ss' }}
+    } @else if (market.status() === 'error') {
+      Producer unavailable
+    } @else {
+      Waiting for the first batch
+    }
+  </span>
+</div>
+<details class="metric-notes">
+  <summary>How the metrics work</summary>
+  <dl>
+    <div>
+      <dt>Last price & spread</dt>
+      <dd>The latest trade price; the current ask minus bid.</dd>
+    </div>
+    <div>
+      <dt>Volume & VWAP</dt>
+      <dd>
+        Traded units and quantity-weighted price since the run began. Available bid and ask
+        quantities do not add to volume.
+      </dd>
+    </div>
+    <div>
+      <dt>Book imbalance</dt>
+      <dd>
+        (Bid quantity − ask quantity) / (bid quantity + ask quantity). Positive favors the bid side;
+        negative favors the ask side. A zero denominator is unavailable.
+      </dd>
+    </div>
+  </dl>
+</details>

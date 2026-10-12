@@ -1,0 +1,79 @@
+<div class="page-heading">
+  <div>
+    <h1>Producer settings</h1>
+    <p>Shape the next run. Your current run stays active while you edit.</p>
+  </div>
+</div>
+<div class="settings-layout">
+  <form [formGroup]="form" (ngSubmit)="apply()" novalidate>
+    @for (field of fields; track field.key) {
+      @let control = form.controls[field.key];
+      <div class="field">
+        <label [for]="field.key">{{ field.label }}</label>
+        <p class="field-hint" [id]="field.key + '-hint'">{{ field.hint }}</p>
+        <div class="input-wrap">
+          <input
+            type="number"
+            [id]="field.key"
+            [formControlName]="field.key"
+            step="1"
+            required
+            [min]="limits[field.key].min"
+            [max]="limits[field.key].max"
+            [attr.aria-describedby]="
+              field.key + '-hint ' + field.key + '-range ' + field.key + '-error'
+            "
+            [attr.aria-invalid]="control.invalid && control.touched ? 'true' : null"
+          />
+          <span aria-hidden="true">{{ field.unit }}</span>
+        </div>
+        <p class="field-range" [id]="field.key + '-range'">
+          {{ limits[field.key].min | number }}–{{ limits[field.key].max | number }} · whole numbers
+          only
+        </p>
+        <p class="field-error" [id]="field.key + '-error'">
+          @if (control.invalid && control.touched) {
+            Enter a whole number between {{ limits[field.key].min | number }} and
+            {{ limits[field.key].max | number }}.
+          }
+        </p>
+      </div>
+    }
+    <div class="apply-section">
+      <p>
+        Applying starts a new run and clears all current prices, volume, and VWAP. It also resumes a
+        paused producer.
+      </p>
+      <button class="button" type="submit">Apply & start new run</button>
+      @if (appliedRun(); as run) {
+        <p class="apply-confirmation" role="status">
+          Run {{ run }} reset. New settings applied.
+          <a routerLink="/">View market</a>
+        </p>
+      }
+    </div>
+  </form>
+  <aside class="settings-summary" aria-label="Generation rate preview">
+    <h2>Generation rate</h2>
+    @if (draftRate(); as rate) {
+      <p class="rate">{{ rate | number: '1.0-2' }} <span>updates/s</span></p>
+    } @else {
+      <p class="rate unavailable">— <span>updates/s</span></p>
+    }
+    <p>Nominal rate across the entire market, rather than per instrument.</p>
+    <p class="rate-formula">Updates per batch × 1,000 / interval in ms</p>
+    <div class="active-run">
+      <h3>Active run {{ market.runId() }}</h3>
+      <p>
+        {{ market.settings().instrumentCount }} instruments<br />{{
+          market.settings().updatesPerBatch | number
+        }}
+        updates every {{ market.settings().intervalMs | number }} ms
+      </p>
+    </div>
+    <p class="muted">
+      The requested interval is approximate. Browser scheduling can slow generation, especially in
+      background tabs.
+    </p>
+  </aside>
+</div>
