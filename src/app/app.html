@@ -2,11 +2,11 @@
   >Skip to content</a
 >
 <header class="app-header">
-  <a class="brand" routerLink="/" aria-label="Market Ledger home">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+  <a class="brand" routerLink="/" aria-label="Market Ledger home"
+    ><svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M4 17V7m8 13V4m8 11V9M1 7h6m2-3h6m2 5h6" /></svg
-    >Market Ledger
-  </a>
+    >Market Ledger</a
+  >
   <nav aria-label="Main navigation">
     <a
       routerLink="/"
@@ -15,34 +15,15 @@
       ariaCurrentWhenActive="page"
       >Market</a
     >
-    <a routerLink="/settings" routerLinkActive="active" ariaCurrentWhenActive="page"
-      >Producer settings</a
-    >
+    <a routerLink="/settings" routerLinkActive="active" ariaCurrentWhenActive="page">Settings</a>
   </nav>
-  <div class="producer-status" role="status" [attr.data-status]="market.status()">
-    <span class="status-dot" aria-hidden="true"></span>
-    @switch (market.status()) {
-      @case ('initializing') {
-        <span>Starting producer</span>
-      }
-      @case ('running') {
-        <span>Producer running</span>
-      }
-      @case ('paused') {
-        <span>Producer paused</span>
-      }
-      @case ('error') {
-        <span>Producer stopped</span>
-      }
-    }
-  </div>
 </header>
 <main #mainContent id="main-content" tabindex="-1">
   @if (market.error(); as error) {
     <div class="error-notice" role="alert">
       <div>
-        <strong>The producer could not continue.</strong>
-        <p>{{ error }} Restart the run to try again.</p>
+        <strong>Producer stopped.</strong>
+        <p>{{ error }}</p>
       </div>
       <button class="button secondary" (click)="market.apply(market.settings())">
         Restart run
@@ -51,6 +32,3 @@
   }
   <router-outlet />
 </main>
-<footer class="app-footer">
-  <span>Simulated data. Fictional instruments.</span><span>Prices in USD</span>
-</footer>

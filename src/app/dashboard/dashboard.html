@@ -1,138 +1,103 @@
 <div class="page-heading">
-  <div>
-    <h1>Live market</h1>
-    <p>Current quotes. Cumulative trades. One active run.</p>
+  <h1>Market</h1>
+  <div class="market-controls">
+    <span class="run-status" role="status">
+      @switch (market.status()) {
+        @case ('initializing') {
+          Initializing
+        }
+        @case ('running') {
+          Running
+        }
+        @case ('paused') {
+          Paused
+        }
+        @case ('error') {
+          Error
+        }
+      }
+    </span>
+    <button
+      class="button"
+      [disabled]="market.status() === 'initializing' || market.status() === 'error'"
+      (click)="market.status() === 'paused' ? market.resume() : market.pause()"
+    >
+      @if (market.status() === 'paused') {
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 10 7-10 7Z" /></svg>Resume
+      } @else {
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12m8-12v12" /></svg>Pause
+      }
+    </button>
   </div>
-  <button
-    class="button"
-    [disabled]="market.status() === 'initializing' || market.status() === 'error'"
-    (click)="market.status() === 'paused' ? market.resume() : market.pause()"
-  >
-    @if (market.status() === 'paused') {
-      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 3 10 7-10 7Z" /></svg>Resume
-    } @else {
-      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12m8-12v12" /></svg>Pause
-    }
-  </button>
 </div>
-<div class="run-strip">
-  <span class="run-label">Run {{ market.runId() }}</span>
-  <span>{{ market.settings().instrumentCount }} instruments</span>
-  <span
-    >{{ market.settings().updatesPerBatch | quantity }} updates /
-    {{ market.settings().intervalMs | quantity }} ms</span
-  >
-  <span
-    >{{ market.nominalRate() | number: '1.0-2' }} updates/s <span class="muted">nominal</span></span
-  >
-  <a routerLink="/settings">Edit producer</a>
-</div>
-<div
-  class="table-scroll"
-  tabindex="0"
-  role="region"
-  aria-label="Market metrics, scroll to see all columns"
->
-  <table>
+<div class="market-table">
+  <table role="table">
     <caption class="visually-hidden">
-      Live metrics for fictional instruments. Volume and VWAP are cumulative since this run began. A
-      dash means unavailable.
+      Market metrics. Volume and VWAP are cumulative for this run. A dash means unavailable. Prices
+      are in USD.
     </caption>
     <thead>
-      <tr>
+      <tr role="row">
         <th scope="col">Instrument</th>
-        <th scope="col">Last price <span>USD</span></th>
-        <th scope="col">Spread <span>USD</span></th>
-        <th scope="col">Volume <span>units</span></th>
-        <th scope="col">VWAP <span>USD</span></th>
-        <th scope="col">Book imbalance <span>−1 to +1</span></th>
+        <th scope="col">Last price</th>
+        <th scope="col">Spread</th>
+        <th scope="col">Volume</th>
+        <th scope="col" title="Volume-weighted average price">VWAP</th>
+        <th scope="col">Book imbalance</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody role="rowgroup">
       @for (row of market.snapshot().rows; track row.symbol) {
-        <tr>
+        @let lastPrice =
+          row.lastCents === null
+            ? '—'
+            : (row.lastCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
+        @let spread =
+          row.spreadCents === null
+            ? '—'
+            : (row.spreadCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
+        @let volume = row.volume | quantity;
+        @let vwap =
+          row.vwapCents === null
+            ? '—'
+            : (row.vwapCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
+        @let imbalance =
+          row.imbalance === null
+            ? '—'
+            : (row.imbalance > 0 ? '+' : '') + (row.imbalance | number: '1.2-2');
+        <tr role="row">
           <th scope="row">{{ row.symbol }}</th>
-          <td [attr.aria-label]="row.lastCents === null ? 'Unavailable' : null">
-            {{
-              row.lastCents === null
-                ? '—'
-                : (row.lastCents / 100 | currency: 'USD' : 'symbol' : '1.2-2')
-            }}
-          </td>
-          <td [attr.aria-label]="row.spreadCents === null ? 'Unavailable' : null">
-            {{
-              row.spreadCents === null
-                ? '—'
-                : (row.spreadCents / 100 | currency: 'USD' : 'symbol' : '1.2-2')
-            }}
-          </td>
-          <td>{{ row.volume | quantity }}</td>
-          <td [attr.aria-label]="row.vwapCents === null ? 'Unavailable' : null">
-            {{
-              row.vwapCents === null
-                ? '—'
-                : (row.vwapCents / 100 | currency: 'USD' : 'symbol' : '1.2-2')
-            }}
+          <td
+            data-label="Last price"
+            [attr.aria-label]="'Last price ' + (row.lastCents === null ? 'unavailable' : lastPrice)"
+          >
+            {{ lastPrice }}
           </td>
           <td
+            data-label="Spread"
+            [attr.aria-label]="'Spread ' + (row.spreadCents === null ? 'unavailable' : spread)"
+          >
+            {{ spread }}
+          </td>
+          <td data-label="Volume" [attr.aria-label]="'Volume ' + volume">{{ volume }}</td>
+          <td
+            data-label="VWAP"
+            [attr.aria-label]="'VWAP ' + (row.vwapCents === null ? 'unavailable' : vwap)"
+          >
+            {{ vwap }}
+          </td>
+          <td
+            data-label="Imbalance"
             [class.positive]="row.imbalance !== null && row.imbalance > 0"
             [class.negative]="row.imbalance !== null && row.imbalance < 0"
-            [attr.aria-label]="row.imbalance === null ? 'Unavailable' : null"
+            [attr.aria-label]="
+              'Book imbalance ' + (row.imbalance === null ? 'unavailable' : imbalance)
+            "
           >
-            @if (row.imbalance === null) {
-              —
-            } @else {
-              <span>{{ row.imbalance > 0 ? '+' : '' }}{{ row.imbalance | number: '1.2-2' }}</span>
-              <span class="imbalance-track" aria-hidden="true"
-                ><span
-                  [style.left.%]="row.imbalance >= 0 ? 50 : 50 + row.imbalance * 50"
-                  [style.width.%]="(row.imbalance >= 0 ? row.imbalance : -row.imbalance) * 50"
-                ></span
-              ></span>
-            }
+            {{ imbalance }}
           </td>
         </tr>
       }
     </tbody>
   </table>
 </div>
-<div class="table-footer">
-  <span
-    >{{ market.snapshot().tradeCount | quantity }} trades counted
-    <span class="footer-separator">·</span> Every trade contributes once</span
-  >
-  <span>
-    @if (market.status() === 'paused') {
-      Paused · totals preserved
-    } @else if (market.updatedAt(); as updatedAt) {
-      Updated {{ updatedAt | date: 'HH:mm:ss' }}
-    } @else if (market.status() === 'error') {
-      Producer unavailable
-    } @else {
-      Waiting for the first batch
-    }
-  </span>
-</div>
-<details class="metric-notes">
-  <summary>How the metrics work</summary>
-  <dl>
-    <div>
-      <dt>Last price & spread</dt>
-      <dd>The latest trade price; the current ask minus bid.</dd>
-    </div>
-    <div>
-      <dt>Volume & VWAP</dt>
-      <dd>
-        Traded units and quantity-weighted price since the run began. Available bid and ask
-        quantities do not add to volume.
-      </dd>
-    </div>
-    <div>
-      <dt>Book imbalance</dt>
-      <dd>
-        (Bid quantity − ask quantity) / (bid quantity + ask quantity). Positive favors the bid side;
-        negative favors the ask side. A zero denominator is unavailable.
-      </dd>
-    </div>
-  </dl>
-</details>

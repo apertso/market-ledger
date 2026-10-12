@@ -1,6 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,9 +7,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { MarketStore } from '../market/market-store';
-import { ProducerSettings, SETTING_LIMITS, validSettings } from '../market/model';
+import { ProducerSettings, SETTING_LIMITS } from '../market/model';
 
 const integer: ValidatorFn = (control) =>
   Number.isInteger(control.value) ? null : { integer: true };
@@ -26,7 +24,7 @@ function settingControl(value: number, key: keyof ProducerSettings): FormControl
 
 @Component({
   selector: 'app-settings',
-  imports: [ReactiveFormsModule, DecimalPipe, RouterLink],
+  imports: [ReactiveFormsModule, DecimalPipe],
   templateUrl: './settings.html',
   styleUrl: './settings.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,39 +37,12 @@ export class Settings {
     intervalMs: settingControl(this.market.settings().intervalMs, 'intervalMs'),
   });
   protected readonly fields = [
-    {
-      key: 'instrumentCount',
-      label: 'Instrument count',
-      hint: 'Fictional instruments in the market table.',
-      unit: 'instruments',
-    },
-    {
-      key: 'updatesPerBatch',
-      label: 'Updates per batch',
-      hint: 'Total trades across all instruments. An instrument can appear more than once.',
-      unit: 'updates',
-    },
-    {
-      key: 'intervalMs',
-      label: 'Batch interval',
-      hint: 'Requested time between generated batches.',
-      unit: 'ms',
-    },
+    { key: 'instrumentCount', label: 'Instrument count', unit: 'instruments' },
+    { key: 'updatesPerBatch', label: 'Updates per batch', unit: 'updates' },
+    { key: 'intervalMs', label: 'Batch interval', unit: 'ms' },
   ] as const;
   protected readonly limits = SETTING_LIMITS;
-  private readonly draft = toSignal(this.form.valueChanges, {
-    initialValue: this.form.getRawValue(),
-  });
-  protected readonly draftRate = computed(() => {
-    const values = this.draft();
-    const settings = {
-      instrumentCount: values.instrumentCount!,
-      updatesPerBatch: values.updatesPerBatch!,
-      intervalMs: values.intervalMs!,
-    };
-    return validSettings(settings) ? (settings.updatesPerBatch * 1000) / settings.intervalMs : null;
-  });
-  protected readonly appliedRun = signal<number | null>(null);
+  protected readonly applied = signal(false);
 
   apply(): void {
     this.form.markAllAsTouched();
@@ -83,6 +54,6 @@ export class Settings {
       intervalMs: values.intervalMs!,
     });
     this.form.markAsPristine();
-    this.appliedRun.set(this.market.runId());
+    this.applied.set(true);
   }
 }

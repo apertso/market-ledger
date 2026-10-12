@@ -23,10 +23,15 @@ Controls are compact rectangles with clear focus and state text.
 STORY: A reviewer sees the simulated market and current run immediately, pauses
 without losing totals, and applies settings with an explicit reset explanation.
 
-FIRST VIEWPORT: A slim navigation bar sits above a 36px market heading with Pause
-on its right. One horizontal run strip precedes a full-width six-column table.
-Below it, a compact count and metric definitions explain the data. Settings use
-the same sheet with three vertically aligned fields and an Apply action.
+FIRST VIEWPORT: A 48px navigation bar sits above a 20px market heading with Pause
+and the required plain producer state on its right. A dense six-column table uses
+13px values and 8px/12px padding on desktop, with no optional counters or footer.
+On phones each instrument uses a compact three-column, two-line group exposing
+all five metrics without horizontal scrolling. Settings use three compact field
+rows and Apply with a single reset notice. Phones retain 24px headings, 16px values,
+and 44px touch targets. The user's refinement
+removes descriptive prose, disclosure, status lights, optional metadata, oversized
+blocks, and redundant controls.
 
 FORM: Settlement ledger, grounded candidate 3, seed e4b347fa. Shared alignment,
 one continuous surface, and fixed numerical baselines carry its discipline.

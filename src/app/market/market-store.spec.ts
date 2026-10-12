@@ -39,7 +39,6 @@ describe('MarketStore', () => {
       expect.objectContaining({ type: 'start', runId: 1, settings: DEFAULT_SETTINGS }),
     );
     expect(TestBed.inject(MarketStore)).toBe(store);
-    expect(store.nominalRate()).toBe(200);
   });
 
   it('resets immediately on Apply and rejects every kind of stale event', () => {

@@ -18,6 +18,10 @@ do not improve this assignment's core behavior, so they are outside the MVP.
   readonly signals that survive route changes.
 - **Components:** semantic table, native validated form, and explicit user actions.
 
+The UI uses a dense table on desktop and compact instrument groups on phones.
+Every metric remains visible without opening details or scrolling horizontally.
+Visible copy is limited to labels, current state, errors, and a short reset notice.
+
 ## Performance and numerical choices
 
 Generation and aggregation cost O(batch size). Snapshot creation and rendering
@@ -44,8 +48,7 @@ and initialization failures cannot overwrite the new run.
 
 Standalone Angular 22 components, signals, OnPush, built-in template control flow,
 and default zoneless change detection keep the UI current and small. Typed reactive
-forms are sufficient for three numeric fields; RxJS is used only to bridge form
-changes into a signal. Settings are loaded on demand.
+forms are sufficient for three numeric fields. Settings are loaded on demand.
 
 AssemblyScript keeps installation and CI in one npm toolchain, with no Wasm binding
 generator or Rust installation. Its TypeScript-like syntax is still compiled Wasm:

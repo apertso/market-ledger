@@ -1,4 +1,4 @@
-import { computed, DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
 import { MarketMetrics } from './metrics';
 import {
   DEFAULT_SETTINGS,
@@ -19,17 +19,12 @@ export class MarketStore {
   );
   private readonly errorState = signal<string | null>(null);
   private readonly runIdState = signal(0);
-  private readonly updatedAtState = signal<Date | null>(null);
 
   readonly settings = this.settingsState.asReadonly();
   readonly status = this.statusState.asReadonly();
   readonly snapshot = this.snapshotState.asReadonly();
   readonly error = this.errorState.asReadonly();
   readonly runId = this.runIdState.asReadonly();
-  readonly updatedAt = this.updatedAtState.asReadonly();
-  readonly nominalRate = computed(
-    () => (this.settings().updatesPerBatch * 1000) / this.settings().intervalMs,
-  );
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.worker?.terminate());
@@ -47,7 +42,6 @@ export class MarketStore {
     this.snapshotState.set(new MarketMetrics(settings.instrumentCount).snapshot());
     this.statusState.set('initializing');
     this.errorState.set(null);
-    this.updatedAtState.set(null);
 
     try {
       this.worker = new Worker(new URL('./market.worker', import.meta.url), { type: 'module' });
@@ -57,7 +51,6 @@ export class MarketStore {
           this.fail(data.message);
         } else {
           this.snapshotState.set(data.snapshot);
-          if (data.snapshot.tradeCount > 0) this.updatedAtState.set(new Date());
           if (data.type === 'state') this.statusState.set(data.status);
           if (data.type === 'snapshot') this.send({ type: 'ack', runId });
         }

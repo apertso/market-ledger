@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T11:12:04Z",
+  "title": "Design System: Market Ledger",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0093 99.98)",
+          "oklch(26.43% 0.0093 99.98)",
+          "oklch(37.86% 0.0093 99.98)",
+          "oklch(49.29% 0.0093 99.98)",
+          "oklch(60.71% 0.0093 99.98)",
+          "oklch(72.14% 0.0093 99.98)",
+          "oklch(83.57% 0.0093 99.98)",
+          "oklch(95% 0.0093 99.98)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Sheet",
+        "tonalRamp": [
+          "oklch(15% 0.0000 0.00)",
+          "oklch(26.43% 0.0000 0.00)",
+          "oklch(37.86% 0.0000 0.00)",
+          "oklch(49.29% 0.0000 0.00)",
+          "oklch(60.71% 0.0000 0.00)",
+          "oklch(72.14% 0.0000 0.00)",
+          "oklch(83.57% 0.0000 0.00)",
+          "oklch(95% 0.0000 0.00)"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Ledger Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0448 174.66)",
+          "oklch(26.43% 0.0448 174.66)",
+          "oklch(37.86% 0.0448 174.66)",
+          "oklch(49.29% 0.0448 174.66)",
+          "oklch(60.71% 0.0448 174.66)",
+          "oklch(72.14% 0.0448 174.66)",
+          "oklch(83.57% 0.0448 174.66)",
+          "oklch(95% 0.0448 174.66)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0231 159.12)",
+          "oklch(26.43% 0.0231 159.12)",
+          "oklch(37.86% 0.0231 159.12)",
+          "oklch(49.29% 0.0231 159.12)",
+          "oklch(60.71% 0.0231 159.12)",
+          "oklch(72.14% 0.0231 159.12)",
+          "oklch(83.57% 0.0231 159.12)",
+          "oklch(95% 0.0231 159.12)"
+        ]
+      },
+      "positive": {
+        "role": "secondary",
+        "displayName": "Positive Green",
+        "tonalRamp": [
+          "oklch(15% 0.0926 158.21)",
+          "oklch(26.43% 0.0926 158.21)",
+          "oklch(37.86% 0.0926 158.21)",
+          "oklch(49.29% 0.0926 158.21)",
+          "oklch(60.71% 0.0926 158.21)",
+          "oklch(72.14% 0.0926 158.21)",
+          "oklch(83.57% 0.0926 158.21)",
+          "oklch(95% 0.0926 158.21)"
+        ]
+      },
+      "negative": {
+        "role": "secondary",
+        "displayName": "Rust",
+        "tonalRamp": [
+          "oklch(15% 0.1401 38.02)",
+          "oklch(26.43% 0.1401 38.02)",
+          "oklch(37.86% 0.1401 38.02)",
+          "oklch(49.29% 0.1401 38.02)",
+          "oklch(60.71% 0.1401 38.02)",
+          "oklch(72.14% 0.1401 38.02)",
+          "oklch(83.57% 0.1401 38.02)",
+          "oklch(95% 0.1401 38.02)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Structural Rule",
+        "tonalRamp": [
+          "oklch(15% 0.0163 130.44)",
+          "oklch(26.43% 0.0163 130.44)",
+          "oklch(37.86% 0.0163 130.44)",
+          "oklch(49.29% 0.0163 130.44)",
+          "oklch(60.71% 0.0163 130.44)",
+          "oklch(72.14% 0.0163 130.44)",
+          "oklch(83.57% 0.0163 130.44)",
+          "oklch(95% 0.0163 130.44)"
+        ]
+      },
+      "rule-soft": {
+        "role": "neutral",
+        "displayName": "Soft Rule",
+        "tonalRamp": [
+          "oklch(15% 0.0124 121.71)",
+          "oklch(26.43% 0.0124 121.71)",
+          "oklch(37.86% 0.0124 121.71)",
+          "oklch(49.29% 0.0124 121.71)",
+          "oklch(60.71% 0.0124 121.71)",
+          "oklch(72.14% 0.0124 121.71)",
+          "oklch(83.57% 0.0124 121.71)",
+          "oklch(95% 0.0124 121.71)"
+        ]
+      },
+      "table-head": {
+        "role": "neutral",
+        "displayName": "Header Wash",
+        "tonalRamp": [
+          "oklch(15% 0.0067 115.70)",
+          "oklch(26.43% 0.0067 115.70)",
+          "oklch(37.86% 0.0067 115.70)",
+          "oklch(49.29% 0.0067 115.70)",
+          "oklch(60.71% 0.0067 115.70)",
+          "oklch(72.14% 0.0067 115.70)",
+          "oklch(83.57% 0.0067 115.70)",
+          "oklch(95% 0.0067 115.70)"
+        ]
+      },
+      "input-rule": {
+        "role": "neutral",
+        "displayName": "Input Boundary",
+        "tonalRamp": [
+          "oklch(15% 0.0267 150.92)",
+          "oklch(26.43% 0.0267 150.92)",
+          "oklch(37.86% 0.0267 150.92)",
+          "oklch(49.29% 0.0267 150.92)",
+          "oklch(60.71% 0.0267 150.92)",
+          "oklch(72.14% 0.0267 150.92)",
+          "oklch(83.57% 0.0267 150.92)",
+          "oklch(95% 0.0267 150.92)"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus Green",
+        "tonalRamp": [
+          "oklch(15% 0.0690 166.80)",
+          "oklch(26.43% 0.0690 166.80)",
+          "oklch(37.86% 0.0690 166.80)",
+          "oklch(49.29% 0.0690 166.80)",
+          "oklch(60.71% 0.0690 166.80)",
+          "oklch(72.14% 0.0690 166.80)",
+          "oklch(83.57% 0.0690 166.80)",
+          "oklch(95% 0.0690 166.80)"
+        ]
+      },
+      "error-surface": {
+        "role": "neutral",
+        "displayName": "Error Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0186 62.46)",
+          "oklch(26.43% 0.0186 62.46)",
+          "oklch(37.86% 0.0186 62.46)",
+          "oklch(49.29% 0.0186 62.46)",
+          "oklch(60.71% 0.0186 62.46)",
+          "oklch(72.14% 0.0186 62.46)",
+          "oklch(83.57% 0.0186 62.46)",
+          "oklch(95% 0.0186 62.46)"
+        ]
+      },
+      "action-hover": {
+        "role": "primary",
+        "displayName": "Action Hover",
+        "tonalRamp": [
+          "oklch(15% 0.0556 169.06)",
+          "oklch(26.43% 0.0556 169.06)",
+          "oklch(37.86% 0.0556 169.06)",
+          "oklch(49.29% 0.0556 169.06)",
+          "oklch(60.71% 0.0556 169.06)",
+          "oklch(72.14% 0.0556 169.06)",
+          "oklch(83.57% 0.0556 169.06)",
+          "oklch(95% 0.0556 169.06)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Page title",
+        "purpose": "Compact desktop heading; larger on phones."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Inherited type base and mobile numerical values."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "Compact desktop buttons; larger on phones."
+      },
+      "ledger": {
+        "displayName": "Ledger values",
+        "purpose": "Desktop numerical cells with tabular figures."
+      },
+      "label": {
+        "displayName": "Field label",
+        "purpose": "Producer-setting names."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Producer state, validation errors, reset notice, and Applied feedback."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Desktop table headings, ranges, and input units."
+      },
+      "mobile-label": {
+        "displayName": "Mobile metric label",
+        "purpose": "The label above every value in mobile instrument groups."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "action-duration",
+        "value": "120ms",
+        "purpose": "Button background-color changes."
+      },
+      {
+        "name": "action-easing",
+        "value": "ease-out",
+        "purpose": "Button hover easing; removed under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sheet-margins",
+        "value": "1088px"
+      },
+      {
+        "name": "mobile-ledger-and-controls",
+        "value": "760px"
+      },
+      {
+        "name": "compact-fields",
+        "value": "420px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Pause/resume and applying a new producer run.",
+      "html": "<button class=\"ds-button-primary\" type=\"button\"><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M6 4v12m8-12v12\"/></svg>Pause</button>",
+      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:32px;padding:6px 12px;background:var(--ink,#173b32);color:var(--surface,#ffffff);border:1px solid var(--ink,#173b32);border-radius:4px;font-family:'IBM Plex Sans Variable',sans-serif;font-size:13px;line-height:1.5;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color 120ms ease-out}.ds-button-primary:hover{background:#285445}.ds-button-primary:focus-visible{outline:2px solid var(--focus,#346c57);outline-offset:4px;}.ds-button-primary:disabled{opacity:.45;cursor:default}.ds-button-primary svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none}@media(max-width:760px){.ds-button-primary{min-height:44px;padding:10px 16px;font-size:15px}.ds-button-primary svg{width:18px;height:18px}}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Restart the producer from an error notice.",
+      "html": "<button class=\"ds-button-secondary\" type=\"button\">Restart run</button>",
+      "css": ".ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:32px;padding:6px 12px;background:transparent;color:var(--ink,#173b32);border:1px solid var(--ink,#173b32);border-radius:4px;font-family:'IBM Plex Sans Variable',sans-serif;font-size:13px;line-height:1.5;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color 120ms ease-out}.ds-button-secondary:hover{background:var(--rule-soft,#e7eae1)}.ds-button-secondary:focus-visible{outline:2px solid var(--focus,#346c57);outline-offset:4px;}.ds-button-secondary:disabled{opacity:.45;cursor:default}.ds-button-secondary svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none}@media(max-width:760px){.ds-button-secondary{min-height:44px;padding:10px 16px;font-size:15px}.ds-button-secondary svg{width:18px;height:18px}}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition:none}}"
+    },
+    {
+      "name": "Numerical field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "A square numerical producer setting with an attached unit.",
+      "html": "<div class=\"ds-field\"><div class=\"ds-field-label\"><label class=\"ds-label\" for=\"ds-batch\">Updates per batch</label><span class=\"ds-range\" id=\"ds-batch-range\">1–1,000 · integers</span></div><div class=\"ds-input-wrap\"><input class=\"ds-input\" id=\"ds-batch\" type=\"number\" value=\"100\" step=\"1\" min=\"1\" max=\"1000\" required aria-describedby=\"ds-batch-range\"/><span class=\"ds-unit\" aria-hidden=\"true\">updates</span></div></div>",
+      "css": ".ds-field{display:grid;grid-template-columns:minmax(0,1fr) 160px;align-items:start;gap:16px;max-width:480px;padding:10px 0;border-bottom:1px solid var(--rule-soft,#e7eae1);font-family:'IBM Plex Sans Variable',sans-serif;color:var(--ink,#173b32);line-height:1.5}.ds-label{display:block;font-size:13px;font-weight:550}.ds-range{display:block;margin-top:3px;color:var(--muted,#58675e);font-size:11px}.ds-input-wrap{display:flex;align-items:center;height:32px;font-size:13px;border:1px solid var(--input-rule,#7d8d80);background:var(--surface,#ffffff)}.ds-input-wrap:focus-within{outline:2px solid var(--focus,#346c57);outline-offset:3px}.ds-input-wrap:has([aria-invalid='true']){border-color:var(--negative,#a54120)}.ds-input{width:100%;min-width:0;height:100%;border:0;outline:0;background:transparent;padding:6px 10px;color:var(--ink,#173b32);font:inherit;font-variant-numeric:tabular-nums;caret-color:var(--ink,#173b32)}.ds-unit{padding-right:10px;font-size:11px;color:var(--muted,#58675e);pointer-events:none}@media(max-width:760px){.ds-field{padding:14px 0}.ds-label{font-size:15px}.ds-range,.ds-unit{font-size:12px}.ds-input-wrap{height:44px;font-size:16px}}@media(max-width:420px){.ds-field{grid-template-columns:minmax(0,1fr) 155px;gap:12px}}"
+    },
+    {
+      "name": "Main navigation",
+      "kind": "nav",
+      "refersTo": "navigation-active",
+      "description": "Text navigation with a ruled current-page state.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a class=\"ds-nav-link ds-current\" href=\"#market\" aria-current=\"page\">Market</a><a class=\"ds-nav-link\" href=\"#settings\">Settings</a></nav>",
+      "css": ".ds-nav{display:flex;gap:20px;min-height:48px;font-family:'IBM Plex Sans Variable',sans-serif;font-size:13px;line-height:1.5}.ds-nav-link{display:flex;align-items:center;color:var(--muted,#58675e);text-decoration:none;border-bottom:2px solid transparent}.ds-nav-link:hover{color:var(--ink,#173b32)}.ds-nav-link:focus-visible{outline:2px solid var(--focus,#346c57);outline-offset:4px;}.ds-nav-link.ds-current{color:var(--ink,#173b32);border-bottom-color:var(--ink,#173b32);font-weight:550}@media(max-width:760px){.ds-nav{gap:24px;font-size:15px;min-height:48px;width:100%}}"
+    },
+    {
+      "name": "Producer state",
+      "kind": "custom",
+      "description": "Plain producer state adjacent to Pause/Resume.",
+      "html": "<span class=\"ds-state\" role=\"status\">Running</span>",
+      "css": ".ds-state{color:var(--muted,#58675e);font-family:'IBM Plex Sans Variable',sans-serif;font-size:12px;line-height:1.5}@media(max-width:760px){.ds-state{font-size:13px}}"
+    },
+    {
+      "name": "Responsive ledger",
+      "kind": "card",
+      "refersTo": "ledger-container",
+      "description": "A continuous ruled table that shows all five metrics in labeled mobile groups.",
+      "html": "<div class=\"ds-ledger\"><table class=\"ds-table\" role=\"table\"><thead class=\"ds-table-head\"><tr role=\"row\"><th scope=\"col\">Instrument</th><th scope=\"col\">Last price</th><th scope=\"col\">Spread</th><th scope=\"col\">Volume</th><th scope=\"col\" title=\"Volume-weighted average price\">VWAP</th><th scope=\"col\">Book imbalance</th></tr></thead><tbody class=\"ds-table-body\" role=\"rowgroup\"><tr role=\"row\"><th scope=\"row\">ALFA</th><td data-label=\"Last price\" aria-label=\"Last price $115.20\">$115.20</td><td data-label=\"Spread\" aria-label=\"Spread $0.08\">$0.08</td><td data-label=\"Volume\" aria-label=\"Volume 15,840\">15,840</td><td data-label=\"VWAP\" aria-label=\"VWAP $114.93\">$114.93</td><td class=\"ds-positive\" data-label=\"Imbalance\" aria-label=\"Book imbalance +0.24\">+0.24</td></tr><tr role=\"row\"><th scope=\"row\">BETA</th><td data-label=\"Last price\" aria-label=\"Last price $92.44\">$92.44</td><td data-label=\"Spread\" aria-label=\"Spread $0.12\">$0.12</td><td data-label=\"Volume\" aria-label=\"Volume 14,208\">14,208</td><td data-label=\"VWAP\" aria-label=\"VWAP $92.51\">$92.51</td><td class=\"ds-negative\" data-label=\"Imbalance\" aria-label=\"Book imbalance −0.18\">−0.18</td></tr></tbody></table></div>",
+      "css": ".ds-ledger{background:var(--surface,#ffffff);color:var(--ink,#173b32);border:1px solid var(--rule,#ccd2c7);font-family:'IBM Plex Sans Variable',sans-serif;line-height:1.5}.ds-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}.ds-table-head th{padding:8px 12px;background:var(--table-head,#f8f9f4);font-size:11px;font-weight:550;border-bottom:1px solid var(--rule,#ccd2c7)}.ds-table th,.ds-table td{text-align:right;white-space:nowrap}.ds-table tr>:first-child{text-align:left}.ds-table-body th,.ds-table-body td{padding:8px 12px;border-bottom:1px solid var(--rule-soft,#e7eae1);font-size:13px}.ds-table-body th{font-weight:600}.ds-table-body tr:last-child>*{border-bottom:0}.ds-table-body tr:hover{background:var(--table-head,#f8f9f4)}.ds-positive{color:var(--positive,#28704c)}.ds-negative{color:var(--negative,#a54120)}@media(max-width:760px){.ds-table,.ds-table-body{display:block}.ds-table-head{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.ds-table-body tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 12px;padding:10px 12px;border-bottom:1px solid var(--rule-soft,#e7eae1)}.ds-table-body tr:last-child{border-bottom:0}.ds-table-body th,.ds-table-body td{height:auto;min-height:34px;padding:0;border:0;text-align:left;font-size:16px;white-space:normal;overflow-wrap:anywhere}.ds-table-body th{display:flex;align-items:center;font-size:16px}.ds-table-body td::before{content:attr(data-label);display:block;color:var(--muted,#58675e);font-size:12px;line-height:1.35;margin-bottom:2px}}"
+    },
+    {
+      "name": "Producer error",
+      "kind": "custom",
+      "description": "A flat error notice with a secondary restart action.",
+      "html": "<div class=\"ds-error\" role=\"alert\"><div><strong>Producer stopped.</strong><p>The producer could not continue.</p></div><button class=\"ds-button-secondary\" type=\"button\">Restart run</button></div>",
+      "css": ".ds-error{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px;margin-bottom:16px;background:var(--error-surface,#fbefe5);border:1px solid var(--negative,#a54120);color:var(--ink,#173b32);font-family:'IBM Plex Sans Variable',sans-serif;font-size:13px;line-height:1.5}.ds-error p{margin:4px 0 0}@media(max-width:760px){.ds-error{align-items:flex-start;flex-direction:column;padding:16px;font-size:14px}}.ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:32px;padding:6px 12px;background:transparent;color:var(--ink,#173b32);border:1px solid var(--ink,#173b32);border-radius:4px;font-family:'IBM Plex Sans Variable',sans-serif;font-size:13px;line-height:1.5;font-weight:500;white-space:nowrap;cursor:pointer;transition:background-color 120ms ease-out}.ds-button-secondary:hover{background:var(--rule-soft,#e7eae1)}.ds-button-secondary:focus-visible{outline:2px solid var(--focus,#346c57);outline-offset:4px;}.ds-button-secondary:disabled{opacity:.45;cursor:default}.ds-button-secondary svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none}@media(max-width:760px){.ds-button-secondary{min-height:44px;padding:10px 16px;font-size:15px}.ds-button-secondary svg{width:18px;height:18px}}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Settlement ledger",
+    "overview": "The finished interface is a compact working sheet. Warm paper surrounds a white ledger; deep green ink, thin rules, and aligned numerical columns give the data its hierarchy. The tone is restrained, orderly, and practical.\n\nThe desktop layout uses dense rows and small controls. Phones retain larger values and touch targets, with all five metrics visible in each instrument group. Short headings and plain state text keep attention on the data. Self-hosted IBM Plex Sans and small authored SVGs provide the visual identity; there are no shipping raster assets.",
+    "keyCharacteristics": [
+      "A continuous ruled working surface.",
+      "Tabular figures and aligned numerical columns.",
+      "Dense desktop rows with larger mobile values.",
+      "All five metrics visible in each mobile instrument group.",
+      "Compact controls, clear focus, and concise state text."
+    ],
+    "rules": [
+      {
+        "name": "The State With Words Rule",
+        "body": "Producer state is plain text beside Pause/Resume, and colored imbalance retains its signed number.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Working surfaces remain flat; dividers and tonal changes distinguish their roles.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** retain tabular figures and desktop numerical alignment.",
+      "**Do** keep all five metrics visible within each mobile instrument group.",
+      "**Do** preserve readable mobile values and 44px mobile control targets.",
+      "**Do** pair imbalance color with its signed value and retain plain producer state.",
+      "**Do** preserve visible focus and the stronger input boundary.",
+      "**Do** use the existing flat surfaces, thin rules, compact controls, and concise labels.",
+      "**Do** honor the existing reduced-motion preference, which removes transitions."
+    ],
+    "donts": [
+      "**Don't** introduce decorative tick animation; the ledger updates quietly.",
+      "**Don't** hide mobile metrics behind horizontal scrolling or expansion."
+    ]
+  }
+}

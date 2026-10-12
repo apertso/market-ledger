@@ -44,6 +44,11 @@ assets, production data, or performance benchmark claims were supplied.
 
 ## Product Principles
 
+- Keep visible copy short and blocks compact; expose all five metrics on phones
+  without horizontal scrolling or opening additional views (user refinement).
+- Use denser desktop rows and controls, with larger text and touch targets on
+  phones. Display only required status and data; omit optional feed badges,
+  counters, timestamps, and explanatory footers (user refinement).
 - Make correctness and run state easy to inspect.
 - Keep work proportional to instrument count, not accumulated history.
 - Prefer platform and Angular features to extra frameworks.
