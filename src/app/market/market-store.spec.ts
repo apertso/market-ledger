@@ -28,6 +28,7 @@ describe('MarketStore', () => {
     store = TestBed.inject(MarketStore);
     worker = FakeWorker.instances[0];
   });
+
   afterEach(() => {
     TestBed.resetTestingModule();
     vi.unstubAllGlobals();

@@ -3,66 +3,102 @@
   align-items: center;
   gap: 12px;
 }
+
 .run-status {
   color: var(--muted);
   font-size: 12px;
 }
+
 .market-table {
   background: var(--surface);
   border: 1px solid var(--rule);
 }
+
 table {
+  display: block;
   width: 100%;
-  border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 }
-thead th {
-  padding: 8px 12px;
+
+thead {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background: var(--table-head);
-  font-size: 11px;
-  font-weight: 550;
   border-bottom: 1px solid var(--rule);
 }
+
+tr {
+  display: grid;
+  grid-template-columns: 1.1fr repeat(5, minmax(0, 1fr));
+}
+
+thead th {
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 550;
+}
+
+tbody {
+  display: block;
+  position: relative;
+}
+
+tbody tr {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
 th,
 td {
+  min-width: 0;
   text-align: right;
   white-space: nowrap;
 }
+
 tr > :first-child {
   text-align: left;
 }
+
 tbody th,
 tbody td {
   padding: 8px 12px;
-  border-bottom: 1px solid var(--rule-soft);
   font-size: 13px;
 }
+
 tbody th {
   font-weight: 600;
 }
-tbody tr:last-child > * {
+
+tbody tr.last-row {
   border-bottom: 0;
 }
+
 tbody tr:hover {
   background: var(--table-head);
 }
+
 .positive {
   color: var(--positive);
 }
+
 .negative {
   color: var(--negative);
 }
+
 @media (max-width: 760px) {
   .market-controls {
     gap: 10px;
   }
+
   .run-status {
     font-size: 13px;
   }
-  table,
-  tbody {
-    display: block;
-  }
+
   thead {
     position: absolute;
     width: 1px;
@@ -70,31 +106,28 @@ tbody tr:hover {
     overflow: hidden;
     clip-path: inset(50%);
   }
+
   tbody tr {
-    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px 12px;
     padding: 10px 12px;
-    border-bottom: 1px solid var(--rule-soft);
   }
-  tbody tr:last-child {
-    border-bottom: 0;
-  }
+
   tbody th,
   tbody td {
-    height: auto;
     min-height: 34px;
     padding: 0;
-    border: 0;
     text-align: left;
     font-size: 16px;
     white-space: normal;
     overflow-wrap: anywhere;
   }
+
   tbody th {
     display: flex;
     align-items: center;
   }
+
   td::before {
     content: attr(data-label);
     display: block;

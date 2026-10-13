@@ -1,17 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { routes } from './app.routes';
 import { MarketStore } from './market/market-store';
 import { MarketMetrics } from './market/metrics';
 import { WorkerEvent } from './market/model';
 
 describe('navigation and run lifetime', () => {
+  beforeEach(() => {
+    // jsdom does not implement window scrolling used by the dashboard virtualizer.
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
+  });
+
   afterEach(() => {
     TestBed.resetTestingModule();
+    vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });
+
   it('preserves metrics and paused state across routes without creating another worker', async () => {
     const worker = {
       onmessage: null as ((event: MessageEvent<WorkerEvent>) => void) | null,

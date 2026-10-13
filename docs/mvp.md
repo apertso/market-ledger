@@ -24,17 +24,19 @@ Visible copy is limited to labels, current state, errors, and a short reset noti
 
 ## Performance and numerical choices
 
-Generation and aggregation cost O(batch size). Snapshot creation and rendering
-cost O(instrument count), capped at 50 rows. Memory contains per-instrument totals
+Generation and aggregation cost O(batch size). Snapshot creation costs
+O(instrument count), capped at 50; rendering scales with the mounted rows.
+Memory contains per-instrument totals
 and one fixed batch; no trade history accumulates. Snapshot messages are limited
-to five per second, with at most one data snapshot awaiting acknowledgment. A pause
+to ten per second, with at most one data snapshot awaiting acknowledgment. A pause
 state message always flushes the latest cumulative totals.
 
-The 200 ms publication interval bounds the work of updating the table separately
-from trade generation. The maximum producer rate still requests 20,000 trades/s;
-every trade contributes to cumulative totals. Controls and state messages are
-immediate. The UI rate was reduced from ten to five refreshes/s after a production
-comparison showed markedly less CPU on Settings while the same feed continued.
+The 100 ms publication interval bounds updates separately from generation. The
+maximum producer rate requests 20,000 trades/s; every trade contributes to totals.
+TanStack Virtual mounts the visible rows plus a two-row buffer on each side,
+using the normal page scrollbar. Measured row heights preserve mobile wrapping.
+Only mounted rows evaluate formatting and update DOM bindings. Offscreen metrics
+remain current in the worker and snapshots; scrolling mounts their latest values.
 
 Volume and notional are BigInt values; generated prices stay in integer cents.
 VWAP divides the integer totals before converting the remainder to a fractional
@@ -55,6 +57,8 @@ and initialization failures cannot overwrite the new run.
 Standalone Angular 22 components, signals, OnPush, built-in template control flow,
 and default zoneless change detection keep the UI current and small. Typed reactive
 forms are sufficient for three numeric fields. Settings are loaded on demand.
+Standalone and OnPush are Angular 22 defaults, so their decorator flags are
+omitted. Component files follow the current feature-based naming convention.
 
 AssemblyScript keeps installation and CI in one npm toolchain, with no Wasm binding
 generator or Rust installation. Its TypeScript-like syntax is still compiled Wasm:

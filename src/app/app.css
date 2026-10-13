@@ -6,6 +6,7 @@
   padding-inline: max(24px, calc((100vw - 1040px) / 2));
   border-bottom: 1px solid var(--rule);
 }
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -15,6 +16,7 @@
   text-decoration: none;
   white-space: nowrap;
 }
+
 .brand svg {
   width: 20px;
   height: 20px;
@@ -22,12 +24,14 @@
   stroke: currentColor;
   stroke-width: 1.6;
 }
+
 nav {
   display: flex;
   align-self: stretch;
   gap: 20px;
   font-size: 13px;
 }
+
 nav a {
   display: flex;
   align-items: center;
@@ -35,19 +39,23 @@ nav a {
   text-decoration: none;
   border-bottom: 2px solid transparent;
 }
+
 nav a.active {
   color: var(--ink);
   border-bottom-color: var(--ink);
   font-weight: 550;
 }
+
 nav a:hover {
   color: var(--ink);
 }
+
 main {
   max-width: 1040px;
   margin-inline: auto;
   padding: 24px 0;
 }
+
 .error-notice {
   display: flex;
   align-items: center;
@@ -59,27 +67,33 @@ main {
   border: 1px solid var(--negative);
   font-size: 13px;
 }
+
 .error-notice p {
   margin: 4px 0 0;
 }
+
 @media (max-width: 1088px) {
   main {
     margin-inline: 24px;
   }
 }
+
 @media (max-width: 760px) {
   .app-header {
     flex-wrap: wrap;
     gap: 0;
     padding: 16px 20px 0;
   }
+
   .brand {
     font-size: 16px;
   }
+
   .brand svg {
     width: 24px;
     height: 24px;
   }
+
   nav {
     width: 100%;
     gap: 24px;
@@ -87,10 +101,12 @@ main {
     margin-top: 8px;
     font-size: 15px;
   }
+
   main {
     margin-inline: 20px;
     padding-top: 20px;
   }
+
   .error-notice {
     align-items: flex-start;
     flex-direction: column;

@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,6 +12,7 @@ import { ProducerSettings, SETTING_LIMITS } from '../market/model';
 
 const integer: ValidatorFn = (control) =>
   Number.isInteger(control.value) ? null : { integer: true };
+
 function settingControl(value: number, key: keyof ProducerSettings): FormControl<number | null> {
   const { min, max } = SETTING_LIMITS[key];
   return new FormControl(value, [
@@ -27,7 +28,6 @@ function settingControl(value: number, key: keyof ProducerSettings): FormControl
   imports: [ReactiveFormsModule, DecimalPipe],
   templateUrl: './settings.html',
   styleUrl: './settings.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Settings {
   protected readonly market = inject(MarketStore);
@@ -47,12 +47,14 @@ export class Settings {
   apply(): void {
     this.form.markAllAsTouched();
     if (this.form.invalid) return;
+
     const values = this.form.getRawValue();
     this.market.apply({
       instrumentCount: values.instrumentCount!,
       updatesPerBatch: values.updatesPerBatch!,
       intervalMs: values.intervalMs!,
     });
+
     this.form.markAsPristine();
     this.applied.set(true);
   }

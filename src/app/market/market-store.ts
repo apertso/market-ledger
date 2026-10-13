@@ -1,4 +1,4 @@
-import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { DestroyRef, inject, Service, signal } from '@angular/core';
 import { MarketMetrics } from './metrics';
 import {
   DEFAULT_SETTINGS,
@@ -9,7 +9,7 @@ import {
   WorkerEvent,
 } from './model';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class MarketStore {
   private worker?: Worker;
   private readonly settingsState = signal<Readonly<ProducerSettings>>(DEFAULT_SETTINGS);

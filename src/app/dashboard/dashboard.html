@@ -31,13 +31,13 @@
   </div>
 </div>
 <div class="market-table">
-  <table role="table">
+  <table role="table" [attr.aria-rowcount]="rowCount() + 1" aria-colcount="6">
     <caption class="visually-hidden">
       Market metrics. Volume and VWAP are cumulative for this run. A dash means unavailable. Prices
       are in USD.
     </caption>
-    <thead>
-      <tr role="row">
+    <thead role="rowgroup">
+      <tr role="row" aria-rowindex="1">
         <th scope="col">Instrument</th>
         <th scope="col">Last price</th>
         <th scope="col">Spread</th>
@@ -46,57 +46,69 @@
         <th scope="col">Book imbalance</th>
       </tr>
     </thead>
-    <tbody role="rowgroup">
-      @for (row of market.snapshot().rows; track row.symbol) {
-        @let lastPrice =
-          row.lastCents === null
-            ? '—'
-            : (row.lastCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
-        @let spread =
-          row.spreadCents === null
-            ? '—'
-            : (row.spreadCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
-        @let volume = row.volume | quantity;
-        @let vwap =
-          row.vwapCents === null
-            ? '—'
-            : (row.vwapCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
-        @let imbalance =
-          row.imbalance === null
-            ? '—'
-            : (row.imbalance > 0 ? '+' : '') + (row.imbalance | number: '1.2-2');
-        <tr role="row">
-          <th scope="row">{{ row.symbol }}</th>
-          <td
-            data-label="Last price"
-            [attr.aria-label]="'Last price ' + (row.lastCents === null ? 'unavailable' : lastPrice)"
+    <tbody #tableBody role="rowgroup" [style.height.px]="virtualizer.getTotalSize()">
+      @for (item of virtualizer.getVirtualItems(); track item.key) {
+        @let row = market.snapshot().rows[item.index];
+        @if (row) {
+          @let lastPrice =
+            row.lastCents === null
+              ? '—'
+              : (row.lastCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
+          @let spread =
+            row.spreadCents === null
+              ? '—'
+              : (row.spreadCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
+          @let volume = row.volume | quantity;
+          @let vwap =
+            row.vwapCents === null
+              ? '—'
+              : (row.vwapCents / 100 | currency: 'USD' : 'symbol' : '1.2-2');
+          @let imbalance =
+            row.imbalance === null
+              ? '—'
+              : (row.imbalance > 0 ? '+' : '') + (row.imbalance | number: '1.2-2');
+          <tr
+            #virtualRow
+            role="row"
+            [attr.aria-rowindex]="item.index + 2"
+            [attr.data-index]="item.index"
+            [class.last-row]="item.index === rowCount() - 1"
+            [style.transform]="'translateY(' + (item.start - scrollMargin()) + 'px)'"
           >
-            {{ lastPrice }}
-          </td>
-          <td
-            data-label="Spread"
-            [attr.aria-label]="'Spread ' + (row.spreadCents === null ? 'unavailable' : spread)"
-          >
-            {{ spread }}
-          </td>
-          <td data-label="Volume" [attr.aria-label]="'Volume ' + volume">{{ volume }}</td>
-          <td
-            data-label="VWAP"
-            [attr.aria-label]="'VWAP ' + (row.vwapCents === null ? 'unavailable' : vwap)"
-          >
-            {{ vwap }}
-          </td>
-          <td
-            data-label="Imbalance"
-            [class.positive]="row.imbalance !== null && row.imbalance > 0"
-            [class.negative]="row.imbalance !== null && row.imbalance < 0"
-            [attr.aria-label]="
-              'Book imbalance ' + (row.imbalance === null ? 'unavailable' : imbalance)
-            "
-          >
-            {{ imbalance }}
-          </td>
-        </tr>
+            <th scope="row">{{ row.symbol }}</th>
+            <td
+              data-label="Last price"
+              [attr.aria-label]="
+                'Last price ' + (row.lastCents === null ? 'unavailable' : lastPrice)
+              "
+            >
+              {{ lastPrice }}
+            </td>
+            <td
+              data-label="Spread"
+              [attr.aria-label]="'Spread ' + (row.spreadCents === null ? 'unavailable' : spread)"
+            >
+              {{ spread }}
+            </td>
+            <td data-label="Volume" [attr.aria-label]="'Volume ' + volume">{{ volume }}</td>
+            <td
+              data-label="VWAP"
+              [attr.aria-label]="'VWAP ' + (row.vwapCents === null ? 'unavailable' : vwap)"
+            >
+              {{ vwap }}
+            </td>
+            <td
+              data-label="Imbalance"
+              [class.positive]="row.imbalance !== null && row.imbalance > 0"
+              [class.negative]="row.imbalance !== null && row.imbalance < 0"
+              [attr.aria-label]="
+                'Book imbalance ' + (row.imbalance === null ? 'unavailable' : imbalance)
+              "
+            >
+              {{ imbalance }}
+            </td>
+          </tr>
+        }
       }
     </tbody>
   </table>

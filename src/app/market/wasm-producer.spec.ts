@@ -7,6 +7,7 @@ describe('Wasm loading errors', () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 404 }));
     await expect(loadProducer('producer.wasm', 5, 42)).rejects.toThrow('HTTP 404');
   });
+
   it('reports corrupt Wasm bytes instead of starting a JavaScript fallback', async () => {
     vi.stubGlobal(
       'fetch',

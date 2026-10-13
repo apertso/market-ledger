@@ -26,6 +26,7 @@ describe('worker producer lifecycle', () => {
       async () => ({ generate }),
     );
   });
+
   afterEach(() => vi.useRealTimers());
 
   it('generates at the requested interval and batch size', async () => {
@@ -74,19 +75,19 @@ describe('worker producer lifecycle', () => {
       await runtime.handle({ type: 'ack', runId: 1 });
     }
     expect(generate).toHaveBeenCalledTimes(20);
-    expect(events.filter((event) => event.type === 'snapshot')).toHaveLength(5);
+    expect(events.filter((event) => event.type === 'snapshot')).toHaveLength(10);
     expect(events.at(-1)).toMatchObject({ snapshot: { tradeCount: 20 } });
   });
 
   it('pausing flushes every trade before the next regular UI refresh', async () => {
     await runtime.handle({ ...start, settings: { ...start.settings, intervalMs: 50 } });
-    vi.advanceTimersByTime(150);
-    expect(generate).toHaveBeenCalledTimes(3);
+    vi.advanceTimersByTime(50);
+    expect(generate).toHaveBeenCalledTimes(1);
     expect(events.filter((event) => event.type === 'snapshot')).toHaveLength(0);
     await runtime.handle({ type: 'pause', runId: 1 });
-    expect(events.at(-1)).toMatchObject({ status: 'paused', snapshot: { tradeCount: 3 } });
+    expect(events.at(-1)).toMatchObject({ status: 'paused', snapshot: { tradeCount: 1 } });
     vi.advanceTimersByTime(1000);
-    expect(generate).toHaveBeenCalledTimes(3);
+    expect(generate).toHaveBeenCalledTimes(1);
   });
 
   it('flushes the latest totals when paused with a snapshot pending', async () => {
