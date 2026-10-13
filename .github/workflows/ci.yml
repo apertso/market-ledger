@@ -15,6 +15,9 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -24,15 +27,23 @@ jobs:
       - run: npm ci
       - run: npm run format:check
       - run: npm test
-      - name: Build for the repository's Pages subpath
+      - uses: actions/configure-pages@v5
+        id: pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.ENABLE_PAGES == 'true'
+      - name: Build for the Pages base path
         env:
           REPOSITORY: ${{ github.event.repository.name }}
+          PAGES_CONFIGURED: ${{ steps.pages.outcome }}
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: |
-          if [[ "$REPOSITORY" == *.github.io ]]; then
-            npm run build -- --base-href /
+          if [[ "$PAGES_CONFIGURED" == success ]]; then
+            BASE_HREF="${PAGES_BASE_PATH}/"
+          elif [[ "$REPOSITORY" == *.github.io ]]; then
+            BASE_HREF="/"
           else
-            npm run build -- --base-href "/$REPOSITORY/"
+            BASE_HREF="/$REPOSITORY/"
           fi
+          npm run build -- --base-href "$BASE_HREF"
       - uses: actions/upload-pages-artifact@v4
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.ENABLE_PAGES == 'true'
         with:
@@ -52,6 +63,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/configure-pages@v5
       - uses: actions/deploy-pages@v4
         id: deployment
