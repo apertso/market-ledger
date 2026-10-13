@@ -47,5 +47,4 @@ public/producer.wasm
 .impeccable/review/
 .impeccable/direction-options.json
 .impeccable/questions/
-reports/*.txt
-reports/*.jsonl
+/reports/

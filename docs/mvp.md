@@ -27,8 +27,14 @@ Visible copy is limited to labels, current state, errors, and a short reset noti
 Generation and aggregation cost O(batch size). Snapshot creation and rendering
 cost O(instrument count), capped at 50 rows. Memory contains per-instrument totals
 and one fixed batch; no trade history accumulates. Snapshot messages are limited
-to ten per second, with at most one data snapshot awaiting acknowledgment. A pause
+to five per second, with at most one data snapshot awaiting acknowledgment. A pause
 state message always flushes the latest cumulative totals.
+
+The 200 ms publication interval bounds the work of updating the table separately
+from trade generation. The maximum producer rate still requests 20,000 trades/s;
+every trade contributes to cumulative totals. Controls and state messages are
+immediate. The UI rate was reduced from ten to five refreshes/s after a production
+comparison showed markedly less CPU on Settings while the same feed continued.
 
 Volume and notional are BigInt values; generated prices stay in integer cents.
 VWAP divides the integer totals before converting the remainder to a fractional

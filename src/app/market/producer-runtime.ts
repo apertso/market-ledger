@@ -2,7 +2,8 @@ import { MarketMetrics } from './metrics';
 import { ProducerSettings, validSettings, WorkerCommand, WorkerEvent } from './model';
 import { loadProducer, WasmProducer } from './wasm-producer';
 
-const MIN_PUBLISH_INTERVAL_MS = 100;
+// Five table refreshes/s limit rendering work; every generated trade is still counted.
+const MIN_PUBLISH_INTERVAL_MS = 200;
 
 // The worker owns generation and aggregation. Angular receives bounded snapshots.
 export class ProducerRuntime {
